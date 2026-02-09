@@ -26,7 +26,7 @@ export class AuthService implements HttpInterceptor {
       req = req.clone({
         setHeaders: {
           "withCredentials": "true",
-          "name": "Sanat",
+          "name": "Yogesh",
 
           Authorization: this.http.getToken()
         }
@@ -42,6 +42,12 @@ export class AuthService implements HttpInterceptor {
           this.router.navigateByUrl('/login/truee');
 
         }
+
+        /* 👇 DATABASE DOWN CASE */
+         if (err.status === 500 || err.status === 503) {
+        // logout nahi karna
+        return throwError(() => err);
+      }
         return throwError(err);
       })
     );

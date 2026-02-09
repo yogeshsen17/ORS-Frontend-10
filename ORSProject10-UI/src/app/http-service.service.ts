@@ -67,9 +67,23 @@ export class HttpServiceService {
     return this.httpClient.get(endpoint).subscribe((data) => {
       console.log('Data :: ' + data);
       callback(data);
+ }, error => {
+    console.log('ORS Error--', error);
 
-    });
-  }
+    let msg = 'Service unavailable';
+
+    if (error && error.error && error.error.message && error.error.message.length > 0) {
+      msg = error.error.message[0];
+    }
+
+    const customError = {
+      status: error.status,
+      message: msg
+    };
+
+    callback(null, customError);
+  });
+}
 
   // post(endpoint, bean, callback) {
   //   // if (this.isLogout()) {

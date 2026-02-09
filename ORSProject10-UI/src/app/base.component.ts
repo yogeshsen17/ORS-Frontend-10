@@ -88,8 +88,17 @@ export class BaseCtl implements OnInit {
   preload() {
     console.log("preload start")
     var _self = this;
-    this.serviceLocator.httpService.get(_self.api.preload, function (res) {
+    this.serviceLocator.httpService.get(_self.api.preload, function (res, err) {
       console.log("base list preload",_self.api.preload)
+
+// 🔴 ERROR case (DB down / 503 / etc)
+      if (err) {
+        _self.form.message = err.message;
+        _self.form.error = true;     // ← THIS makes it red
+        return;
+      }
+
+
       if (res.success) {
         _self.form.preload = res.result;
       } else {
@@ -120,7 +129,15 @@ export class BaseCtl implements OnInit {
     console.log("search start")
     var _self = this;
     console.log("Search Form", _self.form.searchParams);
-    this.serviceLocator.httpService.post(_self.api.search + "/" + _self.form.pageNo, _self.form.searchParams, function (res) {
+    this.serviceLocator.httpService.post(_self.api.search + "/" + _self.form.pageNo, _self.form.searchParams, function (res, err) {
+
+// 🔴 ERROR case (DB down / 503 / etc)
+      if (err) {
+        _self.form.message = err.message;
+        _self.form.error = true;     // ← THIS makes it red
+        return;
+      }
+
 
 
       if (res.success) {
@@ -146,13 +163,21 @@ export class BaseCtl implements OnInit {
     console.log("previous/next search start")
     var _self = this;
     console.log("Search Form", _self.form.searchParams);
-    this.serviceLocator.httpService.post(_self.api.search + "/" + _self.form.pageNo, _self.form.searchParams, function (res) {
+    this.serviceLocator.httpService.post(_self.api.search + "/" + _self.form.pageNo, _self.form.searchParams, function (res, err) {
 
       if (operation == 'next' || operation == 'previous') {
         _self.nextList = res.result.nextList;
         _self.form.message = null;
         _self.form.error = false;
       }
+
+      // 🔴 ERROR case (DB down / 503 / etc)
+      if (err) {
+        _self.form.message = err.message;
+        _self.form.error = true;     // ← THIS makes it red
+        return;
+      }
+
       
 
       if (res.success) {
@@ -177,8 +202,16 @@ export class BaseCtl implements OnInit {
 
     var _self = this;
     console.log('Inside display method');
-    this.serviceLocator.httpService.get(_self.api.get + "/" + _self.form.data.id, function (res) {
+    this.serviceLocator.httpService.get(_self.api.get + "/" + _self.form.data.id, function (res, err) {
      _self.form.data.id=0;
+
+     // 🔴 ERROR case (DB down / 503 / etc)
+      if (err) {
+        _self.form.message = err.message;
+        _self.form.error = true;     // ← THIS makes it red
+        return;
+      }
+
        if (res.success) {
          _self.populateForm(_self.form.data, res.result.data);
          console.log('@@@@@@@@');
@@ -217,7 +250,7 @@ export class BaseCtl implements OnInit {
     console.log(this.form + "submit running start");
     console.log("form data going to be submit" + this.form.data);
     //  console.log("form data going to be submit" + this.studentId);
-    this.serviceLocator.httpService.post(this.api.save, this.form.data, function (res) {
+    this.serviceLocator.httpService.post(this.api.save, this.form.data, function (res, err) {
       _self.form.message = '';
        _self.form.inputerror = {};
 
@@ -226,6 +259,12 @@ export class BaseCtl implements OnInit {
       if (res.success) {
 
         _self.form.message = "Data is saved";
+
+          if (err) {
+        _self.form.message = err.message;
+        _self.form.error = true;     // ← THIS makes it red
+        return;
+      }
         
         
         if (_self.form.data.id && _self.form.data.id > 0) {
@@ -268,9 +307,15 @@ export class BaseCtl implements OnInit {
 
     deleteMany(id, callback?) {
     var _self = this;
-    this.serviceLocator.httpService.post(_self.api.deleteMany + "/" + id, this.form.searchParams, function (res) {
+    this.serviceLocator.httpService.post(_self.api.deleteMany + "/" + id, this.form.searchParams, function (res, err) {
       if (res.success) {
         _self.form.message = "Data is deleted";
+
+       if (err) {
+        _self.form.message = err.message;
+        _self.form.error = true;     // ← THIS makes it red
+        return;
+      }
         
         
 
