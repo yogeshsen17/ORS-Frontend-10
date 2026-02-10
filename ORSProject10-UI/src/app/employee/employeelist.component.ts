@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { BaseListCtl } from '../base-list.component';
 import { ServiceLocatorService } from '../service-locator.service';
