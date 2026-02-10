@@ -91,14 +91,11 @@ export class BaseCtl implements OnInit {
     this.serviceLocator.httpService.get(_self.api.preload, function (res, err) {
       console.log("base list preload",_self.api.preload)
 
-// 🔴 ERROR case (DB down / 503 / etc)
       if (err) {
         _self.form.message = err.message;
         _self.form.error = true;     // ← THIS makes it red
         return;
       }
-
-
       if (res.success) {
         _self.form.preload = res.result;
       } else {
@@ -126,59 +123,59 @@ export class BaseCtl implements OnInit {
    * Searhs records 
    */
     search() {
-    console.log("search start")
-    var _self = this;
-    console.log("Search Form", _self.form.searchParams);
-    this.serviceLocator.httpService.post(_self.api.search + "/" + _self.form.pageNo, _self.form.searchParams, function (res, err) {
+      console.log("search start")
+      var _self = this;
 
-// 🔴 ERROR case (DB down / 503 / etc)
+      this.serviceLocator.httpService.post(
+      _self.api.search + "/" + _self.form.pageNo,
+      _self.form.searchParams,
+
+      function (res, err) {
+
+      // 🔴 ERROR case (DB down / 503 / etc)
       if (err) {
         _self.form.message = err.message;
         _self.form.error = true;     // ← THIS makes it red
         return;
       }
 
-
-
+      // ✅ SUCCESS case
       if (res.success) {
+
         _self.form.list = res.result.data;
         _self.nextList = res.result.nextList;
 
-        
         if (_self.form.list.length == 0) {
-          
-          _self.form.message = "No record found"; 
+          _self.form.message = "No record found";
           _self.form.error = true;
+        } else {
+          _self.form.message = "";
+          _self.form.error = false;
         }
-        console.log("List Size", _self.form.list.length);
+
       } else {
-        _self.form.error = false;
+        // business validation error from backend
         _self.form.message = res.result.message;
+        _self.form.error = true;   // also red
       }
-      console.log('FORM', _self.form);
-    });
+
+        console.log('FORM', _self.form);
+      }
+    );
   }
+
 
   searchOperation(operation: String) {
     console.log("previous/next search start")
     var _self = this;
     console.log("Search Form", _self.form.searchParams);
-    this.serviceLocator.httpService.post(_self.api.search + "/" + _self.form.pageNo, _self.form.searchParams, function (res, err) {
+    this.serviceLocator.httpService.post(_self.api.search + "/" + _self.form.pageNo, _self.form.searchParams, function (res) {
 
       if (operation == 'next' || operation == 'previous') {
         _self.nextList = res.result.nextList;
         _self.form.message = null;
         _self.form.error = false;
       }
-
-// 🔴 ERROR case (DB down / 503 / etc)
-      if (err) {
-        _self.form.message = err.message;
-        _self.form.error = true;     // ← THIS makes it red
-        return;
-      }
-
-
       
 
       if (res.success) {
@@ -206,7 +203,7 @@ export class BaseCtl implements OnInit {
     this.serviceLocator.httpService.get(_self.api.get + "/" + _self.form.data.id, function (res, err) {
      _self.form.data.id=0;
 
-     // 🔴 ERROR case (DB down / 503 / etc)
+       // 🔴 ERROR case (DB down / 503 / etc)
       if (err) {
         _self.form.message = err.message;
         _self.form.error = true;     // ← THIS makes it red
@@ -215,13 +212,13 @@ export class BaseCtl implements OnInit {
 
        if (res.success) {
          _self.populateForm(_self.form.data, res.result.data);
-         console.log('@@@@@@@@');
        }
        else {
         _self.form.error = true;
         _self.form.message = res.result.message;
       }
-      console.log('FORM @@@@@@@', _self.form);
+      console.log('FORM', _self.form);
+     
     });
   }
 
@@ -233,11 +230,8 @@ export class BaseCtl implements OnInit {
    * @param data 
    */
   populateForm(form, data) {
-     console.log('@@@@@@@@ 2');
     form.id = data.id;
-     console.log('@@@@@@@@ 2');
     console.log(form.iduser + 'formid in base ctl populate form');
-     console.log('@@@@@@@@ 3');
   }
 
   /**
@@ -257,24 +251,14 @@ export class BaseCtl implements OnInit {
 
        console.log('dataa ===== > ', res.result.data);
 
-      // 🔴 ERROR case (DB down / 503 / etc)
-      if (err) {
+       if (err) {
         _self.form.message = err.message;
         _self.form.error = true;     // ← THIS makes it red
         return;
       }
-
 
       if (res.success) {
-
         _self.form.message = "Data is saved";
-
-          if (err) {
-        _self.form.message = err.message;
-        _self.form.error = true;     // ← THIS makes it red
-        return;
-      }
-        
         
         if (_self.form.data.id && _self.form.data.id > 0) {
           _self.form.data.id = res.result.data;
@@ -319,13 +303,12 @@ export class BaseCtl implements OnInit {
     this.serviceLocator.httpService.post(_self.api.deleteMany + "/" + id, this.form.searchParams, function (res, err) {
       if (res.success) {
         _self.form.message = "Data is deleted";
-
-       if (err) {
+        
+        if (err) {
         _self.form.message = err.message;
         _self.form.error = true;     // ← THIS makes it red
         return;
       }
-        
         
 
         if (callback) {
