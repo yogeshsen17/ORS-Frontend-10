@@ -70,7 +70,7 @@ export class HttpServiceService {
  }, error => {
     console.log('ORS Error--', error);
 
-    let msg = 'Service unavailable';
+    let msg = 'DataBase Service is currently unavailable';
 
     if (error && error.error && error.error.message && error.error.message.length > 0) {
       msg = error.error.message[0];
@@ -115,7 +115,7 @@ export class HttpServiceService {
       }, (error) => {
         console.log('ORS Error--', error);
 
-        let msg = 'Service is currently unavailable';
+        let msg = 'DataBase Service is currently unavailable';
 
         if (error && error.error && error.error.result && error.error.result.message) {
           msg = error.error.result.message;
