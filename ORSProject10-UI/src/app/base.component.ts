@@ -171,12 +171,13 @@ export class BaseCtl implements OnInit {
         _self.form.error = false;
       }
 
-      // 🔴 ERROR case (DB down / 503 / etc)
+// 🔴 ERROR case (DB down / 503 / etc)
       if (err) {
         _self.form.message = err.message;
         _self.form.error = true;     // ← THIS makes it red
         return;
       }
+
 
       
 
@@ -255,6 +256,14 @@ export class BaseCtl implements OnInit {
        _self.form.inputerror = {};
 
        console.log('dataa ===== > ', res.result.data);
+
+      // 🔴 ERROR case (DB down / 503 / etc)
+      if (err) {
+        _self.form.message = err.message;
+        _self.form.error = true;     // ← THIS makes it red
+        return;
+      }
+
 
       if (res.success) {
 
