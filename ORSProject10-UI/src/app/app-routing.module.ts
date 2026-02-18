@@ -36,6 +36,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { MyprofileComponent } from './user/myprofile.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { EmployeelistComponent } from './employee/employeelist.component';
+import { StaffMemberComponent } from './staff-member/staff-member.component';
+import { StaffmemberlistComponent } from './staff-member/staffmemberlist.component';
 
 
 
@@ -269,7 +271,18 @@ const routes: Routes = [
         path: 'employeelist',
         component: EmployeelistComponent
 
-    }
+    },
+
+    {
+        path: 'staffmember',
+        component: StaffMemberComponent
+
+    },
+    {
+        path: 'staffmemberlist',
+        component: StaffmemberlistComponent
+
+    },
     
 
 

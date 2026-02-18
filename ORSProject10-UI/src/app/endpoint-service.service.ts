@@ -4,8 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 
-
-  export class EndpointServiceService {
+export class EndpointServiceService {
 
   constructor() { }
 
@@ -23,6 +22,7 @@ import { Injectable } from '@angular/core';
   public JASPERREPORT = this.SERVER_URL + "/Jasper";
 
   public EMPLOYEE = this.SERVER_URL + "/Employee"
+  public STAFFMEMBER = this.SERVER_URL + "/StaffMember"
  
 
 
