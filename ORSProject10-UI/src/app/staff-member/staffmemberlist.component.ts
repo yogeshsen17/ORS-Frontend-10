@@ -33,8 +33,8 @@ export class StaffmemberlistComponent extends BaseListCtl implements OnInit {
   message: string;
   
 
-  constructor(public locator: ServiceLocatorService, public route: ActivatedRoute, private httpClient: HttpClient, public httpService: HttpServiceService) {
-    super(locator.endpoints.STAFFMEMBER, locator, route, httpService);
+  constructor(public locator: ServiceLocatorService, public route: ActivatedRoute, private httpClient: HttpClient) {
+    super(locator.endpoints.STAFFMEMBER, locator, route);
   }
 
 
