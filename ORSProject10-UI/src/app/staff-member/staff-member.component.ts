@@ -13,8 +13,8 @@ export class StaffMemberComponent extends BaseCtl implements OnInit {
 
   errorMessageName: string = '';
 
-  constructor(public locator: ServiceLocatorService, public route: ActivatedRoute, public httpService: HttpServiceService) {
-    super(locator.endpoints.STAFFMEMBER, locator, route, httpService);
+  constructor(public locator: ServiceLocatorService, public route: ActivatedRoute) {
+    super(locator.endpoints.STAFFMEMBER, locator, route);
   }
 
    onUpload(userform: FormData) {
