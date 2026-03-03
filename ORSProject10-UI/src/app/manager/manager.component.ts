@@ -13,8 +13,8 @@ export class ManagerComponent extends BaseCtl implements OnInit {
 
   errorMessageName: string = '';
 
-  constructor(public locator: ServiceLocatorService, public route: ActivatedRoute, public httpService: HttpServiceService) {
-    super(locator.endpoints.MANAGER, locator, route, httpService);
+  constructor(public locator: ServiceLocatorService, public route: ActivatedRoute) {
+    super(locator.endpoints.MANAGER, locator, route);
   }
 
    onUpload(userform: FormData) {
