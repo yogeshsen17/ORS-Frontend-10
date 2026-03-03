@@ -21,8 +21,9 @@ export class EndpointServiceService {
   public TIMETABLE = this.SERVER_URL + "/TimeTable";
   public JASPERREPORT = this.SERVER_URL + "/Jasper";
 
-  public EMPLOYEE = this.SERVER_URL + "/Employee"
-  public STAFFMEMBER = this.SERVER_URL + "/StaffMember"
+  
+  public MANAGER = this.SERVER_URL + "/Manager"
+
  
 
 

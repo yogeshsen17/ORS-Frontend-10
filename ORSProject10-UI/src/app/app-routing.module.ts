@@ -38,7 +38,8 @@ import { EmployeeComponent } from './employee/employee.component';
 import { EmployeelistComponent } from './employee/employeelist.component';
 import { StaffMemberComponent } from './staff-member/staff-member.component';
 import { StaffmemberlistComponent } from './staff-member/staffmemberlist.component';
-
+import { ManagerComponent } from './manager/manager.component';
+import { ManagerlistComponent } from './manager/managerlist.component';
 
 
 const routes: Routes = [
@@ -283,6 +284,22 @@ const routes: Routes = [
         component: StaffmemberlistComponent
 
     },
+{
+        path: 'manager',
+        component: ManagerComponent
+
+    },
+    {
+        path: 'managerlist',
+        component: ManagerlistComponent
+
+    },
+    {
+        path: 'manager/:id',
+        component: ManagerComponent
+
+    },
+    
     
 
 

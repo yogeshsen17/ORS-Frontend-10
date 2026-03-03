@@ -56,6 +56,8 @@ import { EmployeeComponent } from './employee/employee.component';
 import { EmployeelistComponent } from './employee/employeelist.component';
 import { StaffMemberComponent } from './staff-member/staff-member.component';
 import { StaffmemberlistComponent } from './staff-member/staffmemberlist.component'
+import { ManagerComponent } from './manager/manager.component';
+import { ManagerlistComponent } from './manager/managerlist.component'
 
 
 
@@ -114,6 +116,8 @@ export function myHttpLoader(http: HttpClient) {
     EmployeelistComponent,
     StaffMemberComponent,
     StaffmemberlistComponent
+    ManagerComponent,
+    ManagerlistComponent
 
   
  
