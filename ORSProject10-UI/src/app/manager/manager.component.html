@@ -86,7 +86,7 @@
                   </div>
                 </div>
 
-                <input type="number" name="contactNumber" [(ngModel)]="form.data.contactNumber" #post="ngModel"
+                <input type="text" name="contactNumber" [(ngModel)]="form.data.contactNumber" #post="ngModel"
                   class="form-control"  maxlength="20" 
                   (keydown)="filterInputS($event, 'errorMessagecontactNumber', 10, 'int')"
                   placeholder="{{ 'Enter contactNumber' | translate }}">

@@ -61,7 +61,7 @@
 
         
         <div class="col-sm-2">
-          <input type="number" name="contactNumber" [(ngModel)]="form.searchParams.contactNumber" class="form-control"
+          <input type="text" name="contactNumber" [(ngModel)]="form.searchParams.contactNumber" class="form-control"
             placeholder="{{ 'Enter  Contact Number' | translate }}">
           <span *ngIf="errorMessagecontactNumber" class="alertRedColor">{{ errorMessagecontactNumber}}</span>
         </div>
