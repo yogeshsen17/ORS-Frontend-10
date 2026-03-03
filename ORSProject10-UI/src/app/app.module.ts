@@ -115,7 +115,7 @@ export function myHttpLoader(http: HttpClient) {
     EmployeeComponent,
     EmployeelistComponent,
     StaffMemberComponent,
-    StaffmemberlistComponent
+    StaffmemberlistComponent,
     ManagerComponent,
     ManagerlistComponent
 
